@@ -7,13 +7,7 @@ class Game
 			@board = Board.new
 		end
 		
-		def start(name = gets.chomp, name2 = gets.chomp)
-			puts "Welcome to Connect Four!"
-			puts "Player 1"
-			@player.info(name)
-			puts "Player 2"
-			@player2.info(name2)
-			[@player.name, @player2.name]
+		def start
 		end
 		
 		def turn(player,board)			

@@ -17,10 +17,12 @@ describe Player do
 	end
 	
 	describe '#info' do
-		let(:user_input) {"James"}
+		before do
+			def @player_too.get_input; "James" end
+		end
 	
 		it 'asks for your name' do
-			expect(@player_too.info(user_input)).to eq("James")			
+			expect(@player_too.info).to eq("James")			
 		end
 		
 		it 'stores your name' do

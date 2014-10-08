@@ -3,9 +3,13 @@ class Player
 	def initialize			
 	end
 	
-	def info (user_input = gets.chomp)
+	def get_input
+		gets.chomp
+	end
+	
+	def info
 		puts "What is your name?"
-		@name = user_input
+		@name = get_input
 	end
 		
 end

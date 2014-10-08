@@ -26,11 +26,8 @@ describe Game do
 	end
 	
 	describe '#start' do
-		let(:player1) {"James"}
-		let(:player2) {"Becca"}
 		
 		it 'assigns names to each player' do
-			expect(@game.start(player1,player2)).to eq(["James","Becca"])
 		end
 		
 		

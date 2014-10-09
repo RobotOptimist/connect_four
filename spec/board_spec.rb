@@ -38,7 +38,7 @@ describe Board do
 					
 				describe 'each hash' do
 					it 'has an element that is blank' do
-						expect(@board.board[0][0].has_key?(:blank)).to be true
+						expect(@board.board[0][0].has_key?(:bla)).to be true
 					end
 						
 					it 'has an element that is red' do
@@ -46,7 +46,7 @@ describe Board do
 					end
 						
 					it 'has an element that is yellow' do
-						expect(@board.board[0][0].has_key?(:yellow)).to be true
+						expect(@board.board[0][0].has_key?(:yel)).to be true
 					end
 				end
 			end
@@ -69,5 +69,43 @@ describe Board do
 				end
 			end			
 		end	
+	end
+	
+	describe '#display' do
+		it 'prints a visual representation of the board' do
+			@board.display
+		end
+	end
+	
+	describe '#move' do
+		it 'takes two arguments' do
+			expect{@board.move()}.to raise_error ArgumentError
+		end
+		
+		it 'the first argument is numeric' do
+			expect{@board.move(:red, :red)}.to raise_error TypeError
+		end
+		
+		it 'the second argument is :yel or :red' do
+			expect{@board.move(1, 1)}.to raise_error ArgumentError
+			expect{@board.move(1, "red")}.to raise_error ArgumentError
+			expect{@board.move(1, :yellow)}.to raise_error ArgumentError
+		end
+		
+		it 'returns true if a move is successfully completed' do
+			expect(@board.move(1,:red)).to be true			
+		end
+		
+		it 'returns false if a move is not possible' do
+			expect(@board.move(1,:red)).to be true			
+			expect(@board.move(1,:yel)).to be true			
+			expect(@board.move(1,:red)).to be true
+			expect(@board.move(1,:yel)).to be true
+			expect(@board.move(1,:red)).to be true			
+			expect(@board.move(1,:yel)).to be true
+			expect(@board.move(1,:red)).to be false
+			@board.display
+		end
+		
 	end
 end

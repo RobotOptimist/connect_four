@@ -37,4 +37,32 @@ class Board
 			raise ArgumentError, 'Argument is not :red or :yel' unless color == :red || color == :yel
 		end
 		
+		def cell_check(row = 0, column = 0)
+			cell = @board[row][column].key(true)
+		end
+		
+		def find_contiguous_color(array)
+			return "nothing" if array.size < 4
+			four_array = array[0,4]
+			return "red" if four_array.count(:red) == 4
+			return "yellow" if four_array.count(:yel) == 4
+			array.shift
+			find_contiguous_color(array)
+		end
+		
+		def convert_rows_to_arrays(rows = [], x = 0)
+			return rows if x > 5
+			row = []; y = 0
+			7.times {row << cell_check(x,y); y += 1 }
+			rows << row
+			x += 1
+			convert_rows_to_arrays(rows,x)
+		end
+		
+		def convert_columns_to_arrays
+		end
+		
+		def row_win
+		end
+		
 end

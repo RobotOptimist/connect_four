@@ -97,14 +97,50 @@ describe Board do
 		end
 		
 		it 'returns false if a move is not possible' do
-			expect(@board.move(1,:red)).to be true			
-			expect(@board.move(1,:yel)).to be true			
-			expect(@board.move(1,:red)).to be true
-			expect(@board.move(1,:yel)).to be true
-			expect(@board.move(1,:red)).to be true			
-			expect(@board.move(1,:yel)).to be true
+			6.times{expect(@board.move(1,:red)).to be true}
 			expect(@board.move(1,:red)).to be false
-			@board.display
+		end
+		
+	end
+	
+	describe '#cell_check' do
+		it 'returns the true key of the cell' do
+			expect(@board.cell_check).to eq(:bla)
+		end
+	end
+	
+	describe '#find_contiguous_color' do
+		it 'takes a single argument that must be an array with 4 elements' do
+			expect(@board.find_contiguous_color([:red,:yel,:red])).to eq("nothing")
+		end
+		
+		it 'can find when four or more contiguous elements in an array are red' do
+			expect(@board.find_contiguous_color([:red,:yel,:red,:red,:red,:red])).to eq("red")
+		end
+		
+		it 'can find when four or more contiguous elements in an array are yellow' do 
+			expect(@board.find_contiguous_color([:red,:yel,:yel,:yel,:yel,:red])).to eq("yellow")
+		end
+	end
+	
+	describe '#convert_rows_to_arrays' do
+		it 'returns an array of 6 elements' do
+			rows = @board.convert_rows_to_arrays
+			expect(rows.size).to eq(6)
+		end
+		
+		describe 'element in array' do
+			it 'has 7 elements' do
+			rows = @board.convert_rows_to_arrays			
+			expect(rows[0].size).to eq(7)
+			end
+		end
+	end
+	
+	describe '#row_win' do
+	
+		it 'finds a winning condition in a row' do
+			
 		end
 		
 	end

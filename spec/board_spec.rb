@@ -131,10 +131,24 @@ describe Board do
 		
 		describe 'element in array' do
 			it 'has 7 elements' do
-			rows = @board.convert_rows_to_arrays			
-			expect(rows[0].size).to eq(7)
+				rows = @board.convert_rows_to_arrays			
+				expect(rows[0].size).to eq(7)
 			end
 		end
+	end
+	
+	describe '#convert_columns_to_arrays' do
+			it 'returns an array of 7 elements' do
+				columns = @board.convert_columns_to_arrays
+				expect(columns.size).to eq(7)
+			end
+			
+			describe 'element in array' do
+				it 'has 6 elements' do
+					columns = @board.convert_columns_to_arrays
+					expect(columns[0].size).to eq(6)
+				end
+			end
 	end
 	
 	describe '#row_win' do

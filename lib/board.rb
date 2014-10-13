@@ -59,7 +59,21 @@ class Board
 			convert_rows_to_arrays(rows,x)
 		end
 		
-		def convert_columns_to_arrays
+		def convert_columns_to_arrays(columns =[], y = 0)
+			return columns if y > 6
+			column = []; x = 0
+			6.times {column << cell_check(x,y); x += 1 }
+			columns << column 
+			y += 1
+			convert_columns_to_arrays(columns,y)
+		end
+		
+		def convert_diagonals_to_arrays(diagonals = [], start = 0)
+			diagonal = []; x = start; y = 0
+			until x > 5 do
+				diagonal << cell_check(x,y)
+				x += 1; y += 1
+			end
 		end
 		
 		def row_win

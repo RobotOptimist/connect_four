@@ -1,6 +1,6 @@
 class Player
-	attr_accessor :name
-	def initialize			
+	attr_accessor :name, :color
+	def initialize
 	end
 	
 	def get_input

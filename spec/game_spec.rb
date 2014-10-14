@@ -25,12 +25,5 @@ describe Game do
 		
 	end
 	
-	describe '#start' do
-		
-		it 'assigns names to each player' do
-		end
-		
-		
-	end
 
 end

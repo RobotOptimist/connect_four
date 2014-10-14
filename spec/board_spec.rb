@@ -151,11 +151,32 @@ describe Board do
 			end
 	end
 	
-	describe '#row_win' do
+	describe '#convert_diagonols_to_arrays' do
+		it 'returns an array with 24 elements' do
+			diagonals = @board.convert_diagonals_to_arrays
+			expect(diagonals.size).to eq(24)
+		end
+	end
+	
+	describe '#find_win' do
 	
 		it 'finds a winning condition in a row' do
-			
+			x = 0
+			4.times {@board.move(x,:red); x += 1}
+			expect(@board.find_win).to eq("red")
 		end
 		
+		it 'finds a winning condition in a column' do
+			4.times {@board.move(0,:yel)}
+			expect(@board.find_win).to eq("yellow")
+		end
+		
+		it 'finds a winning condition in a diagonal' do
+			@board.move(0,:red); @board.move(1,:yel)
+			@board.move(1,:red); @board.move(2,:yel); @board.move(2,:red)
+			@board.move(2,:red); @board.move(3,:yel); @board.move(3,:red); @board.move(3,:yel)
+			@board.move(3,:red)
+			expect(@board.find_win).to eq("red")
+		end
 	end
 end

@@ -68,15 +68,75 @@ class Board
 			convert_columns_to_arrays(columns,y)
 		end
 		
-		def convert_diagonals_to_arrays(diagonals = [], start = 0)
-			diagonal = []; x = start; y = 0
-			until x > 5 do
+		def convert_diagonals_to_arrays_part_1(diagonals = [], start = 0)
+			return diagonals if diagonals.size == 6
+			diagonal = []; x = start; y = 0			
+			until x > 5
 				diagonal << cell_check(x,y)
 				x += 1; y += 1
 			end
+			diagonals << diagonal
+			start += 1
+			convert_diagonals_to_arrays_part_1(diagonals, start)
 		end
 		
-		def row_win
+		def convert_diagonals_to_arrays_part_2(diagonals = [], start = 1)
+			return diagonals if diagonals.size == 6
+			diagonal = []; x = 0; y = start			
+			until y > 6
+				diagonal << cell_check(x,y)
+				x += 1; y += 1
+			end
+			diagonals << diagonal
+			start += 1
+			convert_diagonals_to_arrays_part_2(diagonals, start)
+		end
+		
+		def convert_diagonals_to_arrays_part_3(diagonals = [], start = 5)
+			return diagonals if diagonals.size == 6
+			diagonal = []; x = 0; y = start			
+			until y < 0
+				diagonal << cell_check(x,y)
+				x += 1; y -= 1
+			end
+			diagonals << diagonal
+			start -= 1
+			convert_diagonals_to_arrays_part_3(diagonals, start)
+		end
+		
+		def convert_diagonals_to_arrays_part_4(diagonals = [], start = 0)
+			return diagonals if diagonals.size == 6
+			diagonal = []; x = start; y = 6
+			until x > 5
+				diagonal << cell_check(x,y)
+				x += 1; y -= 1
+			end
+			diagonals << diagonal
+			start += 1
+			convert_diagonals_to_arrays_part_4(diagonals, start)
+		end
+		
+		def convert_diagonals_to_arrays
+			diagonals = convert_diagonals_to_arrays_part_1
+			diagonals2 = convert_diagonals_to_arrays_part_2
+			diagonals3 = convert_diagonals_to_arrays_part_3
+			diagonals4 = convert_diagonals_to_arrays_part_4
+			diagonals + diagonals2 + diagonals3 + diagonals4
+		end
+		
+		def find_win
+			diagonals = convert_diagonals_to_arrays
+			columns = convert_columns_to_arrays
+			rows = convert_rows_to_arrays
+			arrays = diagonals + columns + rows
+			arrays.each do |array|
+				color = find_contiguous_color(array)
+				if color == "red" || color == "yellow"
+					puts "#{color.capitalize} is the winner!"
+					return color
+				end
+			end
+			"no winner"
 		end
 		
 end
